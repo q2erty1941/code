@@ -3,7 +3,7 @@
 #include <ctime>
 using namespace std;
 
-void PrintArray(int** const Arr, const int rows, const int cols)
+void PrintArray(const int** const Arr, const int rows, const int cols)
 {
 	cout << endl << "Array[][]" << endl << endl;
 
