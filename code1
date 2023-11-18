@@ -1,0 +1,92 @@
+#include <iostream>
+#include <iomanip>
+#include <ctime>
+using namespace std;
+
+void PrintArray(int** const Arr, const int rows, const int cols)
+{
+	cout << endl << "Array[][]" << endl << endl;
+
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+			cout << setw(6) << Arr[i][j];
+
+		cout << endl;
+	}
+
+	cout << endl;
+}
+
+void PrintArray(const int* const Arr, const int size)
+{
+	cout << endl << "Array[]" << endl << endl;
+
+	for (int i = 0; i < size; i++)
+		cout << setw(6) << *(Arr + i);
+
+	cout << endl;
+}
+
+void FillArray(int** const Arr, const int rows, const int cols)
+{
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+			Arr[i][j] = rand() % 20;
+	}
+}
+
+void FillArray(int* const Arr, const int size)
+{
+	for (int i = 0; i < size; i++)
+		*(Arr + i) = rand() % 20;
+}
+
+void main()
+{
+	srand(time(NULL));
+
+	int size, rows, cols;
+	char selection;
+
+	cout << "choose [] (1) or [][] (2): ";
+	cin >> selection;
+
+	if (selection == '1')
+	{
+		cout << endl << "enter the size of array: ";
+		cin >> size;
+
+		int *Arr = new int [size];
+
+		FillArray(Arr, size);
+		PrintArray(Arr, size);
+
+		delete[] Arr;
+	}
+	else if (selection == '2')
+	{
+		cout << endl << "enter the rows of array: ";
+		cin >> rows;
+
+		cout << "enter the cols of array: ";
+		cin >> cols;
+
+
+		int **Arr = new int* [rows];
+
+		for (int i = 0; i < rows; i++)
+			*(Arr + i) = new int [cols];
+
+
+		FillArray(Arr, rows, cols);
+		PrintArray(Arr, rows, cols);
+
+
+		for (int i = 0; i < rows; i++)
+			delete[] *(Arr + i);
+
+		delete[] Arr;
+	}
+}
